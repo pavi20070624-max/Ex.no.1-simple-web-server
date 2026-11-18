@@ -42,94 +42,128 @@ Stop the Spring Boot server once testing is complete.
 
 ## Program 
 
-simple-web-server/
+simplewebserver/
 ├── src/
 │   └── main/
 │       ├── java/
 │       │   └── com.example.demo/
-│       │       ├── DemoApplication.java
-│       │       └── HelloController.java
+│       │       ├── SimplewebserverApplication.java
+│       │       └── WebServerController.java
 │       └── resources/
 │           └── application.properties
 ├── pom.xml
 
  ### Pom.xml
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
-                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>4.1.1</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.example</groupId>
+	<artifactId>simplewebserver</artifactId>
+	<version>4.0.1-SNAPSHOT</version>
+	<name/>
+	<description/>
+	<url/>
+	<licenses>
+		<license/>
+	</licenses>
+	<developers>
+		<developer/>
+	</developers>
+	<scm>
+		<connection/>
+		<developerConnection/>
+		<tag/>
+		<url/>
+	</scm>
+	<properties>
+		<java.version>25</java.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webmvc</artifactId>
+		</dependency>
 
-    <groupId>com.example</groupId>
-    <artifactId>simple-web-server</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>Simple Web Server</name>
-    <description>Demo project for Spring Boot Web Server</description>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webmvc-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.2</version>
-        <relativePath/>
-    </parent>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 
-    <dependencies>
-        <!-- Spring Boot Web -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-    </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 </project>
 
-### DemoApplication.java
+```
+  
 
-package com.example.demo;
+### SimplewebserverApplication.java
+```
+package com.example.simplewebserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
-    }
+public class SimplewebserverApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SimplewebserverApplication.class, args);
+	}
+
 }
+```
 
 
-### HelloController.java
-package com.example.demo;
+### WebServerController.java
+```
+package com.example.simplewebserver;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class HelloController {
+public class WebServerController {
+
+    @GetMapping("/")
+    public String home(){
+        return "Hi there";
+    }
 
     @GetMapping("/hello")
-    public String sayHello() {
+   public String hello(){
         return "Hello, Spring Boot!";
     }
 }
 
+```
 
 ### application.properties:
-
- server.port=8081
+spring.application.name=simplewebserver
 
 
 
 
 Output:
+<img width="1440" height="830" alt="ex01(a)" src="https://github.com/user-attachments/assets/e25927b6-a1e3-41fb-87de-c112c3090a4c" />
+
+<img width="1440" height="847" alt="ex01" src="https://github.com/user-attachments/assets/55a604b3-ff73-4470-b9c3-1d4a2ad47b7f" />
 
 
